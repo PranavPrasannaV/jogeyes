@@ -138,33 +138,24 @@ We're already there.`,
     },
     "4": {
       id: "4",
-      title: "Autumn Reflections",
-      content: "Golden leaves dance in the autumn breeze, whispering secrets of the trees...",
-      fullContent: `Golden leaves dance in the autumn breeze, whispering secrets of the trees,
-Each one falling, free and light, painting the world in amber bright.
-
-The season turns with gentle grace,
-Time leaves its mark on nature's face,
-Yet in this ending, I can see,
-The promise of what's yet to be.
-
-For autumn teaches us to let go,
-To trust in what we cannot know,
-That death is but a transformation,
-A pause before new creation.
-
-So I gather these leaves, gold and red,
-And hold the wisdom they have spread—
-That change is neither loss nor gain,
-But part of life's eternal refrain.`,
-      tag: "poetry",
+      title: "The Creatures",
+      content: "Jay was playing in pools filled with caramel, surrounded by cities made of chocolate and marshmallows...",
+      fullContent: `Jay was playing in pools filled with caramel, surrounded by cities made of chocolate and marshmallows. 
+      Diving into his pool he slurps up as much Caramel as he can fill into his mouth. He slowly swallows all of it, as he begins to sink deeper and deeper in the confectionary filled pool.
+      He continues to sink, eating candy after candy, only consuming more as he descends. 
+      Through the endless abyss of sugary delight, floating glittery unicorns made of marshmallows, and many hundreds of chocolate bunnies all floating along with him.
+      As he keeps on consuming these sweets, his eyes grow heavy, and he struggles to see in the caramel around him. He was able to breathe somehow, which came to his attention rather late, as he found that nothing made any sense.
+      He was somehow swimming in a pool filled with caramel and had zero problems breathing or swimming in the otherwise viscous liquid. As he keeps sinking, his chest tightens as the pressure of the caramel begins to weigh down upon him.
+      He coughs, and gasps for air as his lungs are filled with heavy syrup. His eyes jolt open as he begins to struggle and flail around, but his efforts were to no avail as he continued to sink, until he hit the bottom, where he promptly woke up from this interesting dream of his. 
+      He sat upright in his bed, looking around the room wildly. `,
+      tag: "story",
       date: "2024-03-10",
-      platform: "Poetry Foundation",
-      platformUrl: "https://poetryfoundation.org/example",
-      description: "A meditation on change, loss, and renewal inspired by watching leaves fall in my backyard. This poem explores how nature's cycles mirror our own emotional transformations.",
+      platform: "Wattpadd, Archive of our Own",
+      platformUrl: "https://www.wattpad.com/story/402882439-the-creature",
+      description: "Asteroids crash into earth as something otherworldly settles into our home. Follow Jay as he strives to find himself while navigating this unfamiliar territory.",
       contests: [
-        { name: "Spring Poetry Slam", award: "1st Place" },
-        { name: "Regional Poetry Competition", award: "Honorable Mention" }
+        { name: "N/A", award: "N/A" },
+        { name: "N/A", award: "N/A" }
       ]
     },
     "5": {
