@@ -62,8 +62,8 @@ export default function WritingPage() {
     },
     {
       id: "5",
-      title: "The Clockmaker's Secret",
-      excerpt: "A mysterious tale of time and lost love...",
+      title: "Stuff",
+      excerpt: "Stuff",
       content: "In a small shop on Baker Street, an old clockmaker kept a peculiar secret...",
       tag: "story",
       views: 3102,
