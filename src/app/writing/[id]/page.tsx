@@ -140,14 +140,7 @@ We're already there.`,
       id: "4",
       title: "The Creatures",
       content: "Jay was playing in pools filled with caramel, surrounded by cities made of chocolate and marshmallows...",
-      fullContent: `Jay was playing in pools filled with caramel, surrounded by cities made of chocolate and marshmallows. 
-      Diving into his pool he slurps up as much Caramel as he can fill into his mouth. He slowly swallows all of it, as he begins to sink deeper and deeper in the confectionary filled pool.
-      He continues to sink, eating candy after candy, only consuming more as he descends. 
-      Through the endless abyss of sugary delight, floating glittery unicorns made of marshmallows, and many hundreds of chocolate bunnies all floating along with him.
-      As he keeps on consuming these sweets, his eyes grow heavy, and he struggles to see in the caramel around him. He was able to breathe somehow, which came to his attention rather late, as he found that nothing made any sense.
-      He was somehow swimming in a pool filled with caramel and had zero problems breathing or swimming in the otherwise viscous liquid. As he keeps sinking, his chest tightens as the pressure of the caramel begins to weigh down upon him.
-      He coughs, and gasps for air as his lungs are filled with heavy syrup. His eyes jolt open as he begins to struggle and flail around, but his efforts were to no avail as he continued to sink, until he hit the bottom, where he promptly woke up from this interesting dream of his. 
-      He sat upright in his bed, looking around the room wildly. `,
+      fullContent: ``,
       tag: "story",
       date: "2024-03-10",
       platform: "Wattpadd, Archive of our Own",
@@ -160,46 +153,23 @@ We're already there.`,
     },
     "5": {
       id: "5",
-      title: "The Clockmaker's Secret",
+      title: "The Creatures",
       content: "In a small shop on Baker Street, an old clockmaker kept a peculiar secret...",
-      fullContent: `In a small shop on Baker Street, an old clockmaker kept a peculiar secret. Every clock in his shop told a different time, and somehow, they were all correct.
-
-I discovered this by accident. I'd come in to repair my grandfather's pocket watch—a family heirloom that had stopped working on the day he passed. The clockmaker, Mr. Thornbury, examined it with jeweler's loupe and gentle fingers.
-
-"Ah," he said softly. "This clock hasn't stopped. It's waiting."
-
-"Waiting for what?"
-
-He looked at me over his spectacles, eyes twinkling with ancient mischief. "For the right moment to continue."
-
-I glanced around the shop. Dozens of clocks lined the walls, each ticking at its own pace. A grandfather clock in the corner read 3:47. A cuckoo clock showed 9:15. The one above the counter insisted it was 11:30.
-
-"Your clocks are all wrong," I said.
-
-"Wrong?" Mr. Thornbury chuckled. "Or simply measuring different things? Time isn't as simple as we like to pretend. That clock"—he pointed to an ornate golden timepiece—"measures the time until someone's first love. That one"—a silver pocket watch in a glass case—"counts down to the moment when a person discovers their life's purpose."
-
-"That's impossible."
-
-"So is a broken clock running again, yet here we are." He wound my grandfather's watch three times, whispered something I couldn't hear, and handed it back to me. It was ticking.
-
-"What time does this one tell?" I asked.
-
-"The time you shared with him. Every tick is a memory. It will run as long as you remember."
-
-I left the shop in a daze. My grandfather's watch read 2:17—the exact time he used to pick me up from school when I was seven.
-
-I've walked past that shop on Baker Street a hundred times since. It's always closed, but through the window, I can see all those clocks, still ticking, still measuring the unmeasurable moments that make up a life.
-
-The pocket watch in my pocket reads 2:17.
-It's always 2:17.
-And that's exactly right.`,
+      fullContent: `Jay was playing in pools filled with caramel, surrounded by cities made of chocolate and marshmallows. 
+      Diving into his pool he slurps up as much Caramel as he can fill into his mouth. He slowly swallows all of it, as he begins to sink deeper and deeper in the confectionary filled pool.
+      He continues to sink, eating candy after candy, only consuming more as he descends. 
+      Through the endless abyss of sugary delight, floating glittery unicorns made of marshmallows, and many hundreds of chocolate bunnies all floating along with him.
+      As he keeps on consuming these sweets, his eyes grow heavy, and he struggles to see in the caramel around him. He was able to breathe somehow, which came to his attention rather late, as he found that nothing made any sense.
+      He was somehow swimming in a pool filled with caramel and had zero problems breathing or swimming in the otherwise viscous liquid. As he keeps sinking, his chest tightens as the pressure of the caramel begins to weigh down upon him.
+      He coughs, and gasps for air as his lungs are filled with heavy syrup. His eyes jolt open as he begins to struggle and flail around, but his efforts were to no avail as he continued to sink, until he hit the bottom, where he promptly woke up from this interesting dream of his. 
+      He sat upright in his bed, looking around the room wildly. `,
       tag: "story",
       date: "2024-03-25",
       platform: "Tor.com",
       platformUrl: "https://tor.com/example-story",
       description: "A magical realism story exploring themes of memory, loss, and the subjective nature of time. This piece was inspired by my own experience inheriting my grandfather's watch and wondering if objects can truly hold memories.",
       contests: [
-        { name: "Fantasy & Science Fiction Contest" }
+        { name: "N/A" }
       ]
     },
     "6": {
