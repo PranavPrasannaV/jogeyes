@@ -7,93 +7,11 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, MessageCircle, Eye, BookOpen, Feather, Sparkles } from "lucide-react";
-
-type PostTag = "poetry" | "story" | "experimental";
-
-interface Post {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  tag: PostTag;
-  views: number;
-  likes: number;
-  comments: number;
-  date: string;
-}
+import { Heart, MessageCircle, Eye, BookOpen, Feather } from "lucide-react";
+import { posts, Post, PostTag } from "@/data/writing";
 
 export default function WritingPage() {
   const router = useRouter();
-  
-  const posts: Post[] = [
-    {
-      id: "1",
-      title: "Whispers in the Dark",
-      excerpt: "A journey through the shadows of midnight thoughts...",
-      content: "In the silence of the night, when stars align and dreams take flight...",
-      tag: "poetry",
-      views: 1247,
-      likes: 89,
-      comments: 12,
-      date: "2024-01-15",
-    },
-    {
-      id: "4",
-      title: "Autumn Reflections",
-      excerpt: "Poetry inspired by the changing seasons...",
-      content: "Golden leaves dance in the autumn breeze, whispering secrets of the trees...",
-      tag: "poetry",
-      views: 1543,
-      likes: 134,
-      comments: 22,
-      date: "2024-03-10",
-    },
-    {
-      id: "2",
-      title: "The Last Train Home",
-      excerpt: "A short story about finding yourself in unexpected places...",
-      content: "The platform was empty except for an old man feeding pigeons...",
-      tag: "story",
-      views: 2341,
-      likes: 156,
-      comments: 28,
-      date: "2024-02-03",
-    },
-    {
-      id: "5",
-      title: "Creatures",
-      excerpt: "Swimming in a pool of caramel...",
-      content: "Asteroids crash onto earth as something foreign establishes itself onto our planet. Jay struggles to find himself, and find out what has come into his home.",
-      tag: "story",
-      views: 62,
-      likes: 6,
-      comments: 0,
-      date: "2024-03-25",
-    },
-    {
-      id: "3",
-      title: "Fragments of Tomorrow",
-      excerpt: "An experimental piece exploring time and memory...",
-      content: "Time folds. Memory splinters. Tomorrow bleeds into yesterday...",
-      tag: "experimental",
-      views: 876,
-      likes: 67,
-      comments: 15,
-      date: "2024-02-20",
-    },
-    {
-      id: "6",
-      title: "Syntax Error: Soul",
-      excerpt: "Where code meets consciousness...",
-      content: "if (soul.exists()) { return meaning; } else { throw new ExistentialException(); }",
-      tag: "experimental",
-      views: 1089,
-      likes: 92,
-      comments: 18,
-      date: "2024-04-08",
-    },
-  ];
 
   const getTagColor = (tag: PostTag) => {
     switch (tag) {
@@ -101,8 +19,6 @@ export default function WritingPage() {
         return "bg-blue-500/10 text-blue-500 hover:bg-blue-500/20";
       case "story":
         return "bg-purple-500/10 text-purple-500 hover:bg-purple-500/20";
-      case "experimental":
-        return "bg-green-500/10 text-green-500 hover:bg-green-500/20";
       default:
         return "bg-gray-500/10 text-gray-500 hover:bg-gray-500/20";
     }
@@ -114,8 +30,6 @@ export default function WritingPage() {
         return Feather;
       case "story":
         return BookOpen;
-      case "experimental":
-        return Sparkles;
       default:
         return BookOpen;
     }
@@ -123,18 +37,20 @@ export default function WritingPage() {
 
   // Group posts by tag
   const groupedPosts = posts.reduce((acc, post) => {
-    if (!acc[post.tag]) {
-      acc[post.tag] = [];
+    const key = post.tag as PostTag;
+    if (!acc[key]) {
+      acc[key] = [] as Post[];
     }
-    acc[post.tag].push(post);
+    acc[key].push(post);
     return acc;
-  }, {} as Record<string, typeof posts>);
+  }, {} as Record<PostTag, Post[]>);
 
-  const tagOrder: PostTag[] = ["poetry", "story", "experimental"];
-  const tagLabels = {
+  // Removed experimental from tag order to hide that section
+  const tagOrder: PostTag[] = ["poetry", "story"];
+  const tagLabels: Record<PostTag, string> = {
     poetry: "Poetry",
-    story: "Stories", 
-    experimental: "Experimental"
+    story: "Stories",
+    experimental: "Experimental",
   };
 
   return (
@@ -146,7 +62,7 @@ export default function WritingPage() {
           <div className="mb-12">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">Writing</h1>
             <p className="text-xl text-muted-foreground">
-              Stories, poetry, and experimental writing organized by type
+              Stories and poetry organized by type
             </p>
           </div>
 
