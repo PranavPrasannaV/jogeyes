@@ -18,7 +18,7 @@ export default function Home() {
     },
     {
       title: "Music",
-      description: "Listen to my original compositions and musical creations",
+      description: "Listen to my music",
       icon: Music,
       href: "/music",
       color: "from-purple-500 to-purple-700",
