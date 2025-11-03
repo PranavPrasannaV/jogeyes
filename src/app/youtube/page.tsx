@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Play, Guitar } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 import { videos, Video } from "@/data/videos";
+import MotionWrapper from "@/components/MotionWrapper";
 
 export default function YouTubePage() {
   const [selectedVideo, setSelectedVideo] = useState<string>("dQw4w9WgXcQ");
@@ -95,50 +96,30 @@ export default function YouTubePage() {
             </Card>
           </div>
 
-          {/* Video Grid */}
+          {/* Video List */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">Recent Uploads</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {videos.map((video) => (
-                <Card
-                  key={video.id}
-                  className={`group overflow-hidden hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent bg-card/50 wood-texture ${
-                    video.id === selectedVideo ? "ring-2 ring-wood-accent" : ""
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleSelect(video.id)}
-                    aria-pressed={video.id === selectedVideo}
-                    className="w-full text-left"
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="bg-wood-accent rounded-full p-4">
-                          <Play className="w-8 h-8 text-wood-dark fill-wood-dark" />
-                        </div>
+            <h2 className="text-2xl font-bold mb-6">All Videos</h2>
+            <MotionWrapper>
+              <div className="space-y-4">
+                {videos.map((video) => (
+                  <Card key={video.id} className="flex items-center gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all">
+                    <img src={video.thumbnail} alt={video.title} className="w-48 h-28 object-cover rounded-md flex-shrink-0" loading="lazy" />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold text-lg">{video.title}</h3>
+                        <div className="text-sm text-muted-foreground">{video.views} • {video.date}</div>
+                      </div>
+                      <p className="text-muted-foreground mt-2 line-clamp-2">{video.title}</p>
+                      <div className="mt-3 flex items-center gap-3">
+                        <button onClick={() => handleSelect(video.id)} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-wood-accent text-wood-dark hover:bg-wood-accent/90 transition-all"> 
+                          <Play className="w-4 h-4" /> Play
+                        </button>
                       </div>
                     </div>
-
-                    <div className="p-4">
-                      <h3 className="font-semibold mb-2 line-clamp-2 group-hover:text-wood-accent transition-colors">
-                        {video.title}
-                      </h3>
-                      <div className="flex items-center justify-between text-sm text-muted-foreground">
-                        <span>{video.views} views</span>
-                        <span>{video.date}</span>
-                      </div>
-                    </div>
-                  </button>
-                </Card>
-              ))}
-            </div>
+                  </Card>
+                ))}
+              </div>
+            </MotionWrapper>
           </div>
         </div>
       </main>
