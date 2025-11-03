@@ -6,55 +6,14 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Play, Guitar } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
-
-interface Video {
-  id: string;
-  title: string;
-  thumbnail: string;
-  views: string;
-  date: string;
-}
+import { videos, Video } from "@/data/videos";
 
 export default function YouTubePage() {
   const [selectedVideo, setSelectedVideo] = useState<string>("dQw4w9WgXcQ");
   const [shouldLoadIframe, setShouldLoadIframe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Sample videos - replace with real video IDs
-  const videos: Video[] = [
-    {
-      id: "dQw4w9WgXcQ",
-      title: "Featured: Acoustic Guitar Cover",
-      thumbnail:
-        "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=450&fit=crop",
-      views: "1.2M",
-      date: "2 weeks ago",
-    },
-    {
-      id: "jNQXAC9IVRw",
-      title: "Behind the Scenes: Guitar Recording Session",
-      thumbnail:
-        "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=450&fit=crop",
-      views: "856K",
-      date: "1 month ago",
-    },
-    {
-      id: "9bZkp7q19f0",
-      title: "Original Guitar Composition",
-      thumbnail:
-        "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800&h=450&fit=crop",
-      views: "542K",
-      date: "2 months ago",
-    },
-    {
-      id: "kJQP7kiw5Fk",
-      title: "Guitar Techniques Tutorial",
-      thumbnail:
-        "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&h=450&fit=crop",
-      views: "723K",
-      date: "3 months ago",
-    },
-  ];
+  // videos are imported from src/data/videos.ts for easy editing
 
   const current = videos.find((v) => v.id === selectedVideo);
 
