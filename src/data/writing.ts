@@ -38,7 +38,7 @@ export const posts: Post[] = [
   },
   {
     id: "2",
-    title: "The Last Train Home",
+    title: "Loss of Power",
     excerpt: "A short story about finding yourself in unexpected places...",
     content: "The platform was empty except for an old man feeding pigeons...",
     tag: "story",
@@ -80,4 +80,15 @@ export const posts: Post[] = [
     comments: 18,
     date: "2024-04-08",
   },
+  {
+    id: "7",
+    title: "The Need to Sleep",
+    excerpt: "A short story about coffee, trains, and small miracles.",
+    content: "He missed the first train, but the second one brought everything into focus...",
+    tag: "story",
+    views: 0,
+    likes: 0,
+    comments: 0,
+    date: "2025-11-02",
+  }
 ];
