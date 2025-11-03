@@ -66,3 +66,14 @@ export const verification = sqliteTable("verification", {
     () => new Date(),
   ),
 });
+
+// Basic comments table for posts/articles
+export const comment = sqliteTable("comment", {
+  id: text("id").primaryKey(),
+  postId: text("post_id").notNull(),
+  name: text("name").notNull(),
+  text: text("text").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .$defaultFn(() => new Date())
+    .notNull(),
+});

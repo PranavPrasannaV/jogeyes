@@ -102,14 +102,14 @@ export default function YouTubePage() {
             <MotionWrapper>
               <div className="space-y-4">
                 {videos.map((video) => (
-                  <Card key={video.id} className="flex items-center gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all">
+                  <Card key={video.id} className="flex items-start gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all min-h-[7rem]">
                     <img src={video.thumbnail} alt={video.title} className="w-48 h-28 object-cover rounded-md flex-shrink-0" loading="lazy" />
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-semibold text-lg">{video.title}</h3>
-                        <div className="text-sm text-muted-foreground">{video.views} • {video.date}</div>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="font-semibold text-lg pr-4">{video.title}</h3>
+                        <div className="text-sm text-muted-foreground whitespace-nowrap">{video.views} • {video.date}</div>
                       </div>
-                      <p className="text-muted-foreground mt-2 line-clamp-2">{video.title}</p>
+                      <p className="text-muted-foreground mt-2 line-clamp-2">{video.description}</p>
                       <div className="mt-3 flex items-center gap-3">
                         <button onClick={() => handleSelect(video.id)} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-wood-accent text-wood-dark hover:bg-wood-accent/90 transition-all"> 
                           <Play className="w-4 h-4" /> Play
