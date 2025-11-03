@@ -24,6 +24,16 @@ export default function YouTubePage() {
     setIsLoading(true);
   }
 
+  // group videos by group and then subcategory
+  const grouped = videos.reduce((acc: Record<string, Record<string, Video[]>>, v) => {
+    const g = v.group || "other";
+    const s = v.subcategory || "general";
+    acc[g] = acc[g] || {};
+    acc[g][s] = acc[g][s] || [];
+    acc[g][s].push(v);
+    return acc;
+  }, {} as Record<string, Record<string, Video[]>>);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -96,27 +106,39 @@ export default function YouTubePage() {
             </Card>
           </div>
 
-          {/* Video List */}
+          {/* Video Groups */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">All Videos</h2>
+            <h2 className="text-2xl font-bold mb-6">Videos by Category</h2>
             <MotionWrapper>
-              <div className="space-y-4">
-                {videos.map((video) => (
-                  <Card key={video.id} className="flex items-start gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all min-h-[7rem]">
-                    <img src={video.thumbnail} alt={video.title} className="w-48 h-28 object-cover rounded-md flex-shrink-0" loading="lazy" />
-                    <div className="flex-1 flex flex-col justify-between">
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="font-semibold text-lg pr-4">{video.title}</h3>
-                        <div className="text-sm text-muted-foreground whitespace-nowrap">{video.views} • {video.date}</div>
+              <div className="space-y-8">
+                {Object.entries(grouped).map(([group, subs]) => (
+                  <section key={group}>
+                    <h3 className="text-xl font-semibold mb-3 capitalize">{group}</h3>
+                    {Object.entries(subs).map(([sub, items]) => (
+                      <div key={sub} className="mb-6">
+                        <h4 className="text-lg font-medium mb-3 capitalize">{sub.replace(/-/g, ' ')}</h4>
+                        <div className="space-y-4">
+                          {items.map((video) => (
+                            <Card key={video.id} className="flex items-start gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all min-h-[7rem]">
+                              <img src={video.thumbnail} alt={video.title} className="w-48 h-28 object-cover rounded-md flex-shrink-0" loading="lazy" />
+                              <div className="flex-1 flex flex-col justify-between">
+                                <div className="flex items-start justify-between gap-4">
+                                  <h3 className="font-semibold text-lg pr-4">{video.title}</h3>
+                                  <div className="text-sm text-muted-foreground whitespace-nowrap">{video.views} • {video.date}</div>
+                                </div>
+                                <p className="text-muted-foreground mt-2 line-clamp-2">{video.description}</p>
+                                <div className="mt-3 flex items-center gap-3">
+                                  <button onClick={() => handleSelect(video.id)} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-wood-accent text-wood-dark hover:bg-wood-accent/90 transition-all"> 
+                                    <Play className="w-4 h-4" /> Play
+                                  </button>
+                                </div>
+                              </div>
+                            </Card>
+                          ))}
+                        </div>
                       </div>
-                      <p className="text-muted-foreground mt-2 line-clamp-2">{video.description}</p>
-                      <div className="mt-3 flex items-center gap-3">
-                        <button onClick={() => handleSelect(video.id)} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-wood-accent text-wood-dark hover:bg-wood-accent/90 transition-all"> 
-                          <Play className="w-4 h-4" /> Play
-                        </button>
-                      </div>
-                    </div>
-                  </Card>
+                    ))}
+                  </section>
                 ))}
               </div>
             </MotionWrapper>

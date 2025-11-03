@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { Youtube, Music, BookOpen, Users, ArrowRight, Sparkles } from "lucide-react";
+import { Youtube, Music, BookOpen, Users, ArrowRight, Sparkles, Camera } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -22,6 +22,13 @@ export default function Home() {
       icon: Music,
       href: "/music",
       color: "from-purple-500 to-purple-700",
+    },
+    {
+      title: "Photography",
+      description: "A small gallery of photos: animals, landscapes, still life and portraits",
+      icon: Camera,
+      href: "/photography",
+      color: "from-yellow-500 to-amber-700",
     },
     {
       title: "Writing",

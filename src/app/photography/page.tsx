@@ -21,13 +21,26 @@ export default function PhotographyPage() {
             <p className="text-xl text-muted-foreground">A small gallery of sample photos. Add your own by editing <code>src/data/photography.ts</code>.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {photographySamples.map((src, i) => (
-              <Card key={i} className="overflow-hidden bg-card/50 wood-texture border-2 border-wood-accent/30">
-                <div className="aspect-video">
-                  <img src={src} alt={`photo-${i}`} className="w-full h-full object-cover" loading="lazy" />
+          <div className="space-y-8">
+            {Object.entries(
+              photographySamples.reduce((acc: Record<string, typeof photographySamples>, p) => {
+                acc[p.category] = acc[p.category] || [];
+                acc[p.category].push(p);
+                return acc;
+              }, {} as Record<string, typeof photographySamples>)
+            ).map(([category, items]) => (
+              <section key={category}>
+                <h3 className="text-xl font-semibold mb-4 capitalize">{category.replace('-', ' ')}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {items.map((p) => (
+                    <Card key={p.id} className="overflow-hidden bg-card/50 wood-texture border-2 border-wood-accent/30">
+                      <div className="aspect-video">
+                        <img src={p.src} alt={`photo-${p.id}`} className="w-full h-full object-cover" loading="lazy" />
+                      </div>
+                    </Card>
+                  ))}
                 </div>
-              </Card>
+              </section>
             ))}
           </div>
         </div>
