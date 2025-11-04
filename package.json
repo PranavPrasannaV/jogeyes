@@ -6,9 +6,11 @@
         "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "generate-lqip": "node scripts/generate-lqip.js"
     },
     "dependencies": {
+        "@upstash/redis": "^1.22.0",
         "@babel/parser": "^7.28.4",
         "@headlessui/react": "^2.2.9",
         "@heroicons/react": "^2.2.0",
@@ -98,6 +100,7 @@
         "zod": "^4.1.12"
     },
     "devDependencies": {
+        "sharp": "^0.32.0",
         "@eslint/eslintrc": "^3.3.1",
         "@tailwindcss/postcss": "^4",
         "@types/node": "^20",

@@ -151,6 +151,28 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Accessible skip link */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    background: linear-gradient(90deg, var(--wood-accent), var(--primary));
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    z-index: 60;
+    transform: translateY(-120%);
+    transition: transform 160ms ease;
+  }
+  .skip-link:focus, .skip-link:not(.sr-only) {
+    transform: translateY(0%);
+  }
+
+  /* Focus-visible helper for keyboard users */
+  :focus {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
   
   /* Real wood grain texture */
   .wood-texture {

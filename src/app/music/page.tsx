@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Pause, Music2, Calendar, Clock, Guitar } from "lucide-react";
 import { useState } from "react";
 import { tracks } from "@/data/music";
+import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 
 export default function MusicPage() {
   const [playingTrack, setPlayingTrack] = useState<string | null>(null);
@@ -58,11 +59,7 @@ export default function MusicPage() {
                     <Card key={track.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-2 hover:border-wood-accent group bg-card/50 wood-texture">
                       <div className="flex flex-col sm:flex-row gap-4 p-4">
                         <div className="relative w-full sm:w-32 aspect-square overflow-hidden rounded-lg bg-gradient-to-br from-wood-accent/20 to-wood-light/20 flex-shrink-0">
-                          <img
-                            src={track.coverArt}
-                            alt={track.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          />
+                          <ImageWithPlaceholder src={track.coverArt} alt={track.title} className="w-full h-full group-hover:scale-110 transition-transform duration-300" />
                           <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             <Button
                               size="sm"

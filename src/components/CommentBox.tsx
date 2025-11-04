@@ -15,6 +15,8 @@ export default function CommentBox({ id }: { id: string }) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
 
   useEffect(() => {
     let mounted = true;
@@ -37,19 +39,21 @@ export default function CommentBox({ id }: { id: string }) {
     if (!text.trim()) return;
     try {
       setLoading(true);
-      const res = await fetch(`/api/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ postId: id, name: name.trim() || "Anonymous", text: text.trim() }),
-      });
-      if (!res.ok) throw new Error("Failed to post");
-      const c = await res.json();
+        const res = await fetch(`/api/comments`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ postId: id, name: name.trim() || "Anonymous", text: text.trim(), honeypot }),
+        });
+        const c = await res.json();
+        if (!res.ok) throw new Error(c?.error || 'Failed to post');
       setComments((prev) => [c, ...prev]);
       setName("");
       setText("");
+        setHoneypot('');
+        setError(null);
     } catch (e) {
-      console.error(e);
-      alert("Failed to submit comment");
+        console.error(e);
+        setError((e as Error).message || 'Failed to submit comment');
     } finally {
       setLoading(false);
     }
@@ -60,6 +64,8 @@ export default function CommentBox({ id }: { id: string }) {
       <h3 className="text-xl font-semibold mb-4">Comments</h3>
 
       <form onSubmit={handleSubmit} className="space-y-3">
+        {/* Honeypot field - hide from users but bots may fill */}
+        <input type="text" name="website" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} className="hidden" tabIndex={-1} autoComplete="off" />
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -76,6 +82,7 @@ export default function CommentBox({ id }: { id: string }) {
           <Button type="submit" disabled={loading}>{loading ? 'Posting...' : 'Post comment'}</Button>
           <Button variant="ghost" onClick={() => { setName(""); setText(""); }}>Clear</Button>
         </div>
+        {error && <div className="text-sm text-red-500">{error}</div>}
       </form>
 
       <div className="mt-6 space-y-4">

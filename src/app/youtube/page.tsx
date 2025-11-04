@@ -8,6 +8,7 @@ import { Play, Guitar } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 import { videos, Video } from "@/data/videos";
 import MotionWrapper from "@/components/MotionWrapper";
+import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 
 export default function YouTubePage() {
   const [selectedVideo, setSelectedVideo] = useState<string>("dQw4w9WgXcQ");
@@ -33,6 +34,10 @@ export default function YouTubePage() {
     acc[g][s].push(v);
     return acc;
   }, {} as Record<string, Record<string, Video[]>>);
+
+  const groups = Object.keys(grouped);
+  const [activeGroup, setActiveGroup] = useState<string>(groups[0] || "all");
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   return (
     <div className="min-h-screen bg-background">
@@ -85,12 +90,7 @@ export default function YouTubePage() {
                     className="w-full h-full"
                   >
                     {current ? (
-                      <img
-                        src={current.thumbnail}
-                        alt={current.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
+                      <ImageWithPlaceholder src={current.thumbnail} alt={current.title} className="w-full h-full" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-white">No preview</div>
                     )}
@@ -109,39 +109,87 @@ export default function YouTubePage() {
           {/* Video Groups */}
           <div>
             <h2 className="text-2xl font-bold mb-6">Videos by Category</h2>
-            <MotionWrapper>
-              <div className="space-y-8">
-                {Object.entries(grouped).map(([group, subs]) => (
-                  <section key={group}>
-                    <h3 className="text-xl font-semibold mb-3 capitalize">{group}</h3>
-                    {Object.entries(subs).map(([sub, items]) => (
-                      <div key={sub} className="mb-6">
-                        <h4 className="text-lg font-medium mb-3 capitalize">{sub.replace(/-/g, ' ')}</h4>
-                        <div className="space-y-4">
-                          {items.map((video) => (
-                            <Card key={video.id} className="flex items-start gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all min-h-[7rem]">
-                              <img src={video.thumbnail} alt={video.title} className="w-48 h-28 object-cover rounded-md flex-shrink-0" loading="lazy" />
-                              <div className="flex-1 flex flex-col justify-between">
-                                <div className="flex items-start justify-between gap-4">
-                                  <h3 className="font-semibold text-lg pr-4">{video.title}</h3>
-                                  <div className="text-sm text-muted-foreground whitespace-nowrap">{video.views} • {video.date}</div>
-                                </div>
-                                <p className="text-muted-foreground mt-2 line-clamp-2">{video.description}</p>
-                                <div className="mt-3 flex items-center gap-3">
-                                  <button onClick={() => handleSelect(video.id)} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-wood-accent text-wood-dark hover:bg-wood-accent/90 transition-all"> 
-                                    <Play className="w-4 h-4" /> Play
-                                  </button>
-                                </div>
-                              </div>
-                            </Card>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </section>
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                {groups.map((g) => (
+                  <button key={g} onClick={() => setActiveGroup(g)} className={`px-3 py-1 rounded ${g === activeGroup ? 'bg-wood-accent text-wood-dark' : 'bg-card/30'}`}>
+                    {g}
+                  </button>
                 ))}
               </div>
-            </MotionWrapper>
+
+              <MotionWrapper>
+                <div className="space-y-8">
+                  {Object.entries(grouped)
+                    .filter(([group]) => group === activeGroup)
+                    .map(([group, subs]) => (
+                      <section key={group}>
+                        <h3 className="text-xl font-semibold mb-3 capitalize">{group}</h3>
+                        {Object.entries(subs).map(([sub, items]) => {
+                          const key = `${group}:${sub}`;
+                          const isExpanded = !!expanded[key];
+                          const visible = isExpanded ? items : items.slice(0, 4);
+                          return (
+                            <div key={sub} className="mb-6">
+                              <h4 className="text-lg font-medium mb-3 capitalize">{sub.replace(/-/g, ' ')}</h4>
+                              <div className="space-y-4">
+                                {visible.map((video) => (
+                                  <Card
+                                    key={video.id}
+                                    className="flex items-start gap-4 p-4 bg-card/50 wood-texture border-2 hover:shadow-lg transition-all min-h-[7rem]"
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => handleSelect(video.id)}
+                                    onKeyDown={(e: React.KeyboardEvent) => {
+                                      if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        handleSelect(video.id);
+                                      }
+                                    }}
+                                    aria-label={`Play ${video.title}`}
+                                  >
+                                    <div className="w-48 h-28 relative rounded-md flex-shrink-0 overflow-hidden">
+                                      <ImageWithPlaceholder src={video.thumbnail} alt={video.title} />
+                                    </div>
+                                    <div className="flex-1 flex flex-col justify-between">
+                                      <div className="flex items-start justify-between gap-4">
+                                        <h3 className="font-semibold text-lg pr-4">{video.title}</h3>
+                                        <div className="text-sm text-muted-foreground whitespace-nowrap">{video.views} • {video.date}</div>
+                                      </div>
+                                      <p className="text-muted-foreground mt-2 line-clamp-2">{video.description}</p>
+                                      <div className="mt-3 flex items-center gap-3">
+                                        <button
+                                          onClick={(ev) => {
+                                            ev.stopPropagation();
+                                            handleSelect(video.id);
+                                          }}
+                                          className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-wood-accent text-wood-dark hover:bg-wood-accent/90 transition-all"
+                                        >
+                                          <Play className="w-4 h-4" /> Play
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </Card>
+                                ))}
+                              </div>
+                              {items.length > 4 && (
+                                <div className="mt-3">
+                                  <button
+                                    onClick={() => setExpanded((s) => ({ ...s, [key]: !s[key] }))}
+                                    className="px-3 py-2 rounded bg-card/30"
+                                  >
+                                    {isExpanded ? 'Show less' : `Show all ${items.length}`}
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </section>
+                    ))}
+                </div>
+              </MotionWrapper>
+            </div>
           </div>
         </div>
       </main>
