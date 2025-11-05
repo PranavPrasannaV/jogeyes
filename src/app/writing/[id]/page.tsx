@@ -52,6 +52,9 @@ export default function WritingDetailPage() {
     }
   };
 
+  // Content fallback: older entries use `content`, newer pages used `fullContent`.
+  const content = (piece as any).fullContent ?? piece.content ?? piece.excerpt ?? '';
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -164,7 +167,7 @@ export default function WritingDetailPage() {
             {/* Full Content */}
             <div className="prose prose-invert prose-lg max-w-none">
               <div className="whitespace-pre-wrap text-foreground/90 leading-relaxed">
-                {piece.fullContent}
+                {content}
               </div>
             </div>
           </Card>
