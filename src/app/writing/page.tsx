@@ -85,7 +85,19 @@ export default function WritingPage() {
 
                   <div className="space-y-6">
                     {tagPosts.map((post) => (
-                      <Card key={post.id} className="p-6 sm:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent group bg-card/50 wood-texture">
+                      <Card
+                        key={post.id}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => router.push(`/writing/${post.id}`)}
+                        onKeyDown={(e: React.KeyboardEvent) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            router.push(`/writing/${post.id}`);
+                          }
+                        }}
+                        className="p-6 sm:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent group bg-card/50 wood-texture cursor-pointer"
+                      >
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-3">
@@ -130,15 +142,6 @@ export default function WritingPage() {
                             <MessageCircle className="w-4 h-4" />
                             <span className="text-sm">{post.comments}</span>
                           </button>
-                          
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="ml-auto hover:text-wood-accent"
-                            onClick={() => router.push(`/writing/${post.id}`)}
-                          >
-                            Read More
-                          </Button>
                         </div>
                       </Card>
                     ))}

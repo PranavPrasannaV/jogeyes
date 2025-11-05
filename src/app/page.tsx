@@ -70,13 +70,13 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg bg-wood-accent hover:bg-wood-accent/90 text-white">
+            <Button asChild size="lg" className="text-lg bg-green-600 hover:bg-green-700 text-white">
               <Link href="/youtube">
                 <Youtube className="w-5 h-5 mr-2" />
                 Watch Videos
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="text-lg border-wood-accent/50 hover:bg-wood-light">
+            <Button asChild size="lg" className="text-lg bg-green-600 hover:bg-green-700 text-white">
               <Link href="/writing">
                 <BookOpen className="w-5 h-5 mr-2" />
                 Read Stories
@@ -96,6 +96,33 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {sections.map((section) => {
               const Icon = section.icon;
+              // center Community card
+              if (section.href === '/community') {
+                return (
+                  <div key={section.href} className="col-span-2 flex justify-center">
+                    <Link href={section.href}>
+                      <Card className="group relative overflow-hidden p-8 h-full hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent bg-card/50 wood-texture w-full max-w-md">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${section.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
+                        <div className="relative z-10 text-center">
+                          <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${section.color} mb-4 mx-auto`}>
+                            <Icon className="w-8 h-8 text-white" />
+                          </div>
+                          <h3 className="text-2xl font-bold mb-2 group-hover:text-wood-accent transition-colors">
+                            {section.title}
+                          </h3>
+                          <p className="text-muted-foreground mb-4">
+                            {section.description}
+                          </p>
+                          <div className="flex items-center justify-center text-wood-accent font-medium group-hover:translate-x-2 transition-transform">
+                            Explore <ArrowRight className="w-4 h-4 ml-2" />
+                          </div>
+                        </div>
+                      </Card>
+                    </Link>
+                  </div>
+                );
+              }
+
               return (
                 <Link key={section.href} href={section.href}>
                   <Card className="group relative overflow-hidden p-8 h-full hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent bg-card/50 wood-texture">
