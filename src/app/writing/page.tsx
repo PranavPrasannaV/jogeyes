@@ -117,12 +117,9 @@ export default function WritingPage() {
                               {post.title}
                             </h3>
                             
-                            <p className="text-muted-foreground mb-4 text-lg">
-                              {post.excerpt}
-                            </p>
-                            
+                            {/* Show a single short snippet from the story content on the card */}
                             <p className="text-foreground/80 italic line-clamp-2">
-                              "{post.content}"
+                              {post.content ? (post.content.length > 220 ? post.content.slice(0, 220) + '…' : post.content) : post.excerpt}
                             </p>
                           </div>
                         </div>

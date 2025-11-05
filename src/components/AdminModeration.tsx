@@ -4,12 +4,16 @@ import * as React from 'react';
 
 export default function AdminModeration() {
   const [token, setToken] = React.useState<string | null>(typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null);
+  const [validated, setValidated] = React.useState<boolean | null>(null);
+  const [stats, setStats] = React.useState<{ total: number; top: Array<[string, number]> } | null>(null);
   const [comments, setComments] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     if (token) fetchAll();
+    // fetch analytics for dashboard regardless (non-authenticated)
+    fetchStats();
   }, [token]);
 
   async function fetchAll() {
@@ -25,9 +29,38 @@ export default function AdminModeration() {
     }
   }
 
+  async function fetchStats() {
+    try {
+      const res = await fetch('/api/analytics/stats');
+      if (!res.ok) return;
+      const j = await res.json();
+      setStats({ total: j.total || 0, top: j.top || [] });
+    } catch (e) {
+      // ignore
+    }
+  }
+
   function saveToken(t: string) {
     localStorage.setItem('admin_token', t);
     setToken(t);
+    setValidated(null);
+  }
+
+  async function validateToken() {
+    if (!token) return alert('Enter token first');
+    try {
+      const res = await fetch('/api/admin/validate', { headers: { 'x-admin-token': token } });
+      if (res.ok) {
+        setValidated(true);
+        fetchAll();
+      } else {
+        setValidated(false);
+        alert('Token invalid');
+      }
+    } catch (e) {
+      setValidated(false);
+      alert('Validation failed');
+    }
   }
 
   async function del(id: string) {
@@ -45,9 +78,13 @@ export default function AdminModeration() {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Admin Moderation</h2>
-      <div className="mb-4 flex gap-2">
+      <div className="mb-4 flex gap-2 items-center">
         <input placeholder="admin token" className="border px-2 py-1 rounded" defaultValue={token ?? ''} onBlur={(e) => saveToken(e.target.value)} />
-        <button onClick={() => fetchAll()} className="px-3 py-1 rounded bg-wood-accent text-wood-dark">Refresh</button>
+        <button onClick={() => validateToken()} className="px-3 py-1 rounded bg-wood-accent text-wood-dark">Validate</button>
+        <button onClick={() => fetchAll()} className="px-3 py-1 rounded bg-wood-accent text-wood-dark">Load comments</button>
+        <div className="ml-2">
+          {validated === true ? <span className="text-sm text-green-500">Validated</span> : validated === false ? <span className="text-sm text-red-500">Invalid</span> : <span className="text-sm text-muted-foreground">Not checked</span>}
+        </div>
       </div>
 
       {loading ? <div>Loading…</div> : (
@@ -65,6 +102,29 @@ export default function AdminModeration() {
           ))}
         </div>
       )}
+
+      {/* Analytics quick view */}
+      <div className="mt-6 p-4 border rounded bg-card/60">
+        <h3 className="text-lg font-semibold mb-2">Site analytics (simple)</h3>
+        {stats ? (
+          <div>
+            <div className="mb-2">Total visits recorded: <strong>{stats.total}</strong></div>
+            <div className="space-y-2">
+              {stats.top.map(([p, n], i) => (
+                <div key={p} className="flex items-center gap-3">
+                  <div className="w-40 text-sm truncate">{p}</div>
+                  <div className="flex-1 bg-gray-200 h-3 rounded overflow-hidden">
+                    <div style={{ width: Math.max(6, Math.round((n / Math.max(1, stats.top[0]?.[1] || 1)) * 100)) + '%' }} className="h-3 bg-wood-accent" />
+                  </div>
+                  <div className="w-12 text-right text-sm">{n}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>Loading analytics…</div>
+        )}
+      </div>
 
       {error && <div className="text-red-500 mt-3">{error}</div>}
     </div>

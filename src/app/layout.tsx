@@ -38,6 +38,10 @@ export default function RootLayout({
             <MiniPlayer />
           </PlayerProvider>
         </div>
+        {/* Simple analytics beacon: sends a small event on page load to /api/analytics/collect */}
+        <Script id="analytics-beacon" strategy="afterInteractive">
+          {`(function(){function send(){try{navigator.sendBeacon('/api/analytics/collect', JSON.stringify({path:location.pathname, ts:Date.now()}));}catch(e){fetch('/api/analytics/collect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:location.pathname,ts:Date.now()})})}}; if(document.readyState==='complete') send(); else window.addEventListener('load',send);})();`}
+        </Script>
         <VisualEditsMessenger />
       </body>
     </html>

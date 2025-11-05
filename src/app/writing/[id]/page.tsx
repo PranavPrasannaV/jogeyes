@@ -95,6 +95,13 @@ export default function WritingDetailPage() {
                 {piece.title}
               </h1>
 
+              {/* Longer excerpt shown on detail page (was removed from card) */}
+              {piece.excerpt && (
+                <div className="mb-6">
+                  <p className="text-lg text-muted-foreground">{piece.excerpt}</p>
+                </div>
+              )}
+
               {/* Platform */}
               {piece.platform && (
                 <div className="flex items-center gap-2 mb-6">
