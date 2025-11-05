@@ -169,6 +169,11 @@ export default function WritingDetailPage() {
             </div>
           </Card>
 
+          {/* Comments */}
+          <div className="mt-8">
+            <CommentBox id={piece.id} />
+          </div>
+
           {/* Bottom Navigation */}
           <div className="mt-8 flex justify-center">
             <Button 
