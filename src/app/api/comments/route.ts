@@ -26,7 +26,10 @@ export async function GET(req: Request) {
     return new Response(JSON.stringify(res.rows), { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch (e) {
     console.error(e);
-    return new Response(JSON.stringify({ error: 'server error' }), { status: 500 });
+    // In dev, return the error message to aid debugging
+    const isDev = process.env.NODE_ENV !== 'production';
+    const msg = isDev && e instanceof Error ? e.message : 'server error';
+    return new Response(JSON.stringify({ error: msg }), { status: 500 });
   }
 }
 

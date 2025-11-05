@@ -34,7 +34,7 @@ export default function AdminModeration() {
       const res = await fetch('/api/analytics/stats');
       if (!res.ok) return;
       const j = await res.json();
-      setStats({ total: j.total || 0, top: j.top || [] });
+      setStats({ total: j.total || 0, top: j.top || [], perDay: j.perDay || [] });
     } catch (e) {
       // ignore
     }
@@ -109,6 +109,23 @@ export default function AdminModeration() {
         {stats ? (
           <div>
             <div className="mb-2">Total visits recorded: <strong>{stats.total}</strong></div>
+            <div className="mb-4">
+              {/* Small sparkline for last 14 days */}
+              {stats.perDay && stats.perDay.length > 0 ? (
+                <svg viewBox="0 0 140 30" className="w-full h-8">
+                  {(() => {
+                    const vals = stats.perDay.map((d: any) => d.count);
+                    const max = Math.max(1, ...vals);
+                    const stepX = 140 / Math.max(1, vals.length - 1);
+                    const points = vals.map((v: number, i: number) => `${i * stepX},${30 - Math.round((v / max) * 28)}`).join(' ');
+                    return <polyline key="spark" fill="none" stroke="#8b5cf6" strokeWidth={2} points={points} />;
+                  })()}
+                </svg>
+              ) : (
+                <div className="text-sm text-muted-foreground">No per-day data</div>
+              )}
+            </div>
+
             <div className="space-y-2">
               {stats.top.map(([p, n], i) => (
                 <div key={p} className="flex items-center gap-3">
