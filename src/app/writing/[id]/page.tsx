@@ -91,14 +91,14 @@ export default function WritingDetailPage() {
                 </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-wood-accent">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-wood-accent">
                 {piece.title}
               </h1>
 
               {/* Longer excerpt shown on detail page (was removed from card) */}
               {piece.excerpt && (
                 <div className="mb-6">
-                  <p className="text-lg text-muted-foreground">{piece.excerpt}</p>
+                  <p className="prose prose-invert prose-sm sm:prose-base lg:prose-lg text-muted-foreground m-0">{piece.excerpt}</p>
                 </div>
               )}
 
@@ -172,11 +172,11 @@ export default function WritingDetailPage() {
             <div className="border-t-2 border-wood-accent/30 my-8" />
 
             {/* Full Content */}
-            <div className="prose prose-invert prose-lg max-w-none">
+            <article className="prose prose-invert prose-sm sm:prose-base lg:prose-lg max-w-none">
               <div className="whitespace-pre-wrap text-foreground/90 leading-relaxed">
                 {content}
               </div>
-            </div>
+            </article>
           </Card>
 
           {/* Comments */}

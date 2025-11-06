@@ -113,14 +113,16 @@ export default function WritingPage() {
                               </span>
                             </div>
                             
-                            <h3 className="text-2xl sm:text-3xl font-bold mb-3 group-hover:text-wood-accent transition-colors">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 group-hover:text-wood-accent transition-colors">
                               {post.title}
                             </h3>
-                            
-                            {/* Show a single short snippet from the story content on the card */}
-                            <p className="text-foreground/80 italic line-clamp-2">
-                              {post.content ? (post.content.length > 220 ? post.content.slice(0, 220) + '…' : post.content) : post.excerpt}
-                            </p>
+
+                            {/* Show a single short snippet from the story content on the card; responsive typography */}
+                            <div className="max-w-none">
+                              <p className="prose prose-invert text-foreground/80 prose-sm sm:prose-base lg:prose-lg italic line-clamp-2 m-0">
+                                {post.content ? (post.content.length > 220 ? post.content.slice(0, 220) + '…' : post.content) : post.excerpt}
+                              </p>
+                            </div>
                           </div>
                         </div>
                         

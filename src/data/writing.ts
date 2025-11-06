@@ -50,8 +50,8 @@ export const posts: Post[] = [
   {
     id: "5",
     title: "Creatures",
-    excerpt: "Swimming in a pool of caramel...",
-    content: "Asteroids crash onto earth as something foreign establishes itself onto our planet. Jay struggles to find himself, and find out what has come into his home.",
+    excerpt: "Asteroids crash onto earth as something foreign establishes itself onto our planet. Jay struggles to find himself, and find out what has come into his home.",
+    content: "Jay was playing in pools filled with caramel, surrounded by cities made of chocolate and marshmallows. Diving into his pool he slurps up as much Caramel as he can fill into his mouth. He slowly swallows all of it, as he begins to sink deeper and deeper in the confectionary filled pool.  He continues to sink, eating candy after candy, only consuming more as he descends. Through the endless abyss of sugary delight, floating glittery unicorns made of marshmallows, and many hundreds of chocolate bunnies all floating along with him. As he keeps on consuming these sweets, his eyes grow heavy, and he struggles to see in the caramel around him. He was able to breathe somehow, which came to his attention rather late, as he found that nothing made any sense. He was somehow swimming in a pool filled with caramel and had zero problems breathing or swimming in the otherwise viscous liquid. As he keeps sinking, his chest tightens as the pressure of the caramel begins to weigh down upon him. He coughs, and gasps for air as his lungs are filled with heavy syrup. His eyes jolt open as he begins to struggle and flail around, but his efforts were to no avail as he continued to sink, until he hit the bottom, where he promptly woke up from this interesting dream of his. He sat upright in his bed, looking around the room wildly. ",
     tag: "story",
     views: 62,
     likes: 6,
