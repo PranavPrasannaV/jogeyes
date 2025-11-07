@@ -13,7 +13,7 @@ export const videos: Video[] = [
   // Gaming group
   {
     id: "mc1",
-    title: "Minecraft: Cozy Survival Let's Play",
+    title: "Designing a base in the HBM NTM Modpack",
     thumbnail: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=450&fit=crop",
     description: "Exploring a handcrafted survival world with mods and simple base-building.",
     views: "120K",
@@ -23,7 +23,7 @@ export const videos: Video[] = [
   },
   {
     id: "fps1",
-    title: "FPS Montage — Headshots & Highlights",
+    title: "Ranked Genji Gameplay - 1 HR",
     thumbnail: "https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee?w=800&h=450&fit=crop",
     description: "A short montage of highlights from various FPS matches.",
     views: "220K",
@@ -65,11 +65,11 @@ export const videos: Video[] = [
   // Guitar group — long form
   {
     id: "guitar-long-1",
-    title: "Full Live Set — Acoustic Originals (60m)",
+    title: "The Master of Puppets - Introduction Cover",
     thumbnail: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=450&fit=crop",
-    description: "A full hour of original acoustic songs recorded live in-studio.",
-    views: "310K",
-    date: "1 month ago",
+    description: "A longer rendition of the introduction to the Metallica song Master of Puppets",
+    views: "37",
+    date: "2 months ago",
     group: "guitar",
     subcategory: "long-form",
   },
@@ -87,7 +87,7 @@ export const videos: Video[] = [
   // Guitar group — short form
   {
     id: "guitar-short-1",
-    title: "30s Guitar Loop — Ambient Melody",
+    title: "",
     thumbnail: "https://images.unsplash.com/photo-1511377021-7f5d0d5f8e9a?w=800&h=450&fit=crop",
     description: "A short clip of a looping ambient guitar idea.",
     views: "540K",
