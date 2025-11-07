@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -11,7 +10,6 @@ import { Heart, MessageCircle, Eye, BookOpen, Feather } from "lucide-react";
 import { posts, Post, PostTag } from "@/data/writing";
 
 export default function WritingPage() {
-  const router = useRouter();
 
   const getTagColor = (tag: PostTag) => {
     switch (tag) {
@@ -85,64 +83,58 @@ export default function WritingPage() {
 
                   <div className="space-y-6">
                     {tagPosts.map((post) => (
-                      <Card
+                      <Link
                         key={post.id}
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => router.push(`/writing/${post.id}`)}
-                        onKeyDown={(e: React.KeyboardEvent) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            router.push(`/writing/${post.id}`);
-                          }
-                        }}
-                        className="p-6 sm:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent group bg-card/50 wood-texture cursor-pointer"
+                        href={`/writing/${post.id}`}
+                        className="group block"
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-3">
-                              <Badge className={getTagColor(post.tag)}>
-                                {post.tag}
-                              </Badge>
-                              <span className="text-sm text-muted-foreground">
-                                {new Date(post.date).toLocaleDateString('en-US', { 
-                                  month: 'long', 
-                                  day: 'numeric', 
-                                  year: 'numeric' 
-                                })}
-                              </span>
+                        <Card className="p-6 sm:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-wood-accent group bg-card/50 wood-texture">
+                          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-3 mb-3">
+                                <Badge className={getTagColor(post.tag)}>
+                                  {post.tag}
+                                </Badge>
+                                <span className="text-sm text-muted-foreground">
+                                  {new Date(post.date).toLocaleDateString('en-US', { 
+                                    month: 'long', 
+                                    day: 'numeric', 
+                                    year: 'numeric' 
+                                  })}
+                                </span>
+                              </div>
+                              
+                              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 group-hover:text-wood-accent transition-colors">
+                                {post.title}
+                              </h3>
+
+                              {/* Show a single short snippet from the story content on the card; responsive typography */}
+                              <div className="max-w-none">
+                                <p className="prose prose-invert text-foreground/80 prose-sm sm:prose-base lg:prose-lg italic line-clamp-2 m-0">
+                                  {post.content ? (post.content.length > 220 ? post.content.slice(0, 220) + '…' : post.content) : post.excerpt}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-6 pt-4 border-t border-border">
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                              <Eye className="w-4 h-4" />
+                              <span className="text-sm">{post.views.toLocaleString()}</span>
                             </div>
                             
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 group-hover:text-wood-accent transition-colors">
-                              {post.title}
-                            </h3>
-
-                            {/* Show a single short snippet from the story content on the card; responsive typography */}
-                            <div className="max-w-none">
-                              <p className="prose prose-invert text-foreground/80 prose-sm sm:prose-base lg:prose-lg italic line-clamp-2 m-0">
-                                {post.content ? (post.content.length > 220 ? post.content.slice(0, 220) + '…' : post.content) : post.excerpt}
-                              </p>
-                            </div>
+                            <button className="flex items-center gap-2 text-muted-foreground hover:text-red-500 transition-colors">
+                              <Heart className="w-4 h-4" />
+                              <span className="text-sm">{post.likes}</span>
+                            </button>
+                            
+                            <button className="flex items-center gap-2 text-muted-foreground hover:text-wood-accent transition-colors">
+                              <MessageCircle className="w-4 h-4" />
+                              <span className="text-sm">{post.comments}</span>
+                            </button>
                           </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-6 pt-4 border-t border-border">
-                          <div className="flex items-center gap-2 text-muted-foreground">
-                            <Eye className="w-4 h-4" />
-                            <span className="text-sm">{post.views.toLocaleString()}</span>
-                          </div>
-                          
-                          <button className="flex items-center gap-2 text-muted-foreground hover:text-red-500 transition-colors">
-                            <Heart className="w-4 h-4" />
-                            <span className="text-sm">{post.likes}</span>
-                          </button>
-                          
-                          <button className="flex items-center gap-2 text-muted-foreground hover:text-wood-accent transition-colors">
-                            <MessageCircle className="w-4 h-4" />
-                            <span className="text-sm">{post.comments}</span>
-                          </button>
-                        </div>
-                      </Card>
+                        </Card>
+                      </Link>
                     ))}
                   </div>
                 </div>
